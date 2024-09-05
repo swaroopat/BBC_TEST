@@ -1,0 +1,32 @@
+Feature: IBL API Testing
+
+Scenario: Verify successful API response and response time
+  When a GET request to the API
+  Then the HTTP status code should be 200
+  And the response time is below 1000 milliseconds
+
+Scenario: Verify id and type fields
+  When a GET request to the API
+  Then array items have non-empty id
+  And items have type "episode"
+
+Scenario: Verify episode title
+  When a GET request to the API
+  Then episodes have a non-empty title
+
+Scenario: Verify live episode
+  When a GET request to the API
+  Then only one episode is live
+
+Scenario: Verify transmission dates
+  When a GET request to the API
+  Then transmission_start time is less than transmission_end for every episode
+
+Scenario: Verify response header date
+  When a GET request to the API
+  Then response header contains validdate
+
+Scenario: Verify 404 response
+  When a GET request to the API with date "2023-09-11"
+  Then HTTP status code is 404
+  And "details" and "http_response_code" in error object properties
