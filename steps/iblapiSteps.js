@@ -17,7 +17,7 @@ When('a GET request to the API with date {string}', async function(date) {
 });
 
 Then(' HTTP status code should be {int}', function(statusCode) {
-  assert.strictEqual(this.response.status, statusCode);
+  assert.equal(this.response.status, statusCode);
 });
 
 Then('the response time is below {int} milliseconds', function(maxTime) {
@@ -48,7 +48,7 @@ Then('all episodes should have a non-empty title', function() {
 Then('only one episode should be live', function() {
   const items = this.response.data.data;
   const liveEpisodes = items.filter(item => item.episode.live);
-  assert.strictEqual(liveEpisodes.length, 1, 'There should be exactly one live episode');
+  assert.equal(liveEpisodes.length, 1, 'There should be exactly one live episode');
 });
 
 Then('transmission_start less than transmission_end for all episodes', function() {
